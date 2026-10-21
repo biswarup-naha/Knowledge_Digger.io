@@ -4,7 +4,7 @@ from pathlib import PurePosixPath, PureWindowsPath
 from fastapi import APIRouter, File, HTTPException, UploadFile, status
 
 from src.services.document_service import (
-    DocumentService,
+    DocumentExtractionService,
 )
 
 
@@ -13,7 +13,7 @@ SUPPORTED_EXTENSIONS = {".pdf", ".docx", ".txt"}
 
 
 def create_document_router(
-    document_service: DocumentService,
+    document_service: DocumentExtractionService,
 ) -> APIRouter:
     router = APIRouter(
         prefix="/documents",

@@ -4,13 +4,13 @@ import pytest
 from docx import Document
 
 from src.services.document_service import (
-    DocumentService,
+    DocumentExtractionService,
 )
 
 
 @pytest.fixture
 def service():
-    return DocumentService()
+    return DocumentExtractionService()
 
 
 def test_extract_txt(service):

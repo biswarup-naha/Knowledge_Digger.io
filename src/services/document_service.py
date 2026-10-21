@@ -6,7 +6,7 @@ from docx import Document
 from pypdf import PdfReader
 
 
-class DocumentService:
+class DocumentExtractionService:
     SUPPORTED_EXTENSIONS = {".pdf", ".docx", ".txt"}
 
     def extract_data(self, filename: str, content: bytes) -> str:
