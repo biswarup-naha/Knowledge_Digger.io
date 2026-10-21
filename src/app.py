@@ -4,7 +4,7 @@ from src.config.app_config import get_settings
 from src.controllers.document_controller import create_document_router
 from src.controllers.health_controller import create_health_router
 from src.controllers.info_controller import create_info_router
-from src.services.document_service import DocumentService
+from src.services.document_service import DocumentExtractionService
 from src.services.health_service import HealthService
 from src.services.info_service import InfoService
 
@@ -30,7 +30,7 @@ class App:
     def _register_routes(self, app: FastAPI) -> None:
         health_service = HealthService()
         info_service = InfoService()
-        document_service = DocumentService()
+        document_service = DocumentExtractionService()
 
         app.include_router(
             create_health_router(health_service),
