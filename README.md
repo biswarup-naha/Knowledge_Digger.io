@@ -1,4 +1,3 @@
-
 # KnowledgeDigger.io
 
 **A private, document-grounded AI knowledge retrieval service powered by Retrieval-Augmented Generation (RAG).**
@@ -149,11 +148,9 @@ The initial API foundation does not require downloading an AI model. Model and v
 ### 1. Clone the repository
 
 ```bash
-git clone <YOUR_REPOSITORY_URL>
+git clone https://github.com/biswarup-naha/Knowledge_Digger.io
 cd Knowledge_Digger.io
 ```
-
-Replace `<YOUR_REPOSITORY_URL>` with your actual Git repository URL.
 
 ### 2. Install dependencies
 
