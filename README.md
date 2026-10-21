@@ -100,38 +100,6 @@ The intended backend responsibilities include:
 
 The current application already uses an application factory-style wrapper to construct the FastAPI application and register routers and services. The architecture will evolve as the project grows.
 
-## Project Structure
-
-The structure below illustrates the intended organization. Some directories will be introduced in later milestones.
-
-```text
-Knowledge_Digger.io/
-├── src/
-│   ├── app.py
-│   ├── config/
-│   │   └── app_config.py
-│   ├── controllers/
-│   │   ├── health_controller.py
-│   │   └── info_controller.py
-│   ├── services/
-│   │   ├── health_service.py
-│   │   └── info_service.py
-│   └── ...                 # Future application modules
-├── tests/                  # Automated tests
-├── data/                   # Local data; excluded from Git
-├── .env.example            # Example configuration
-├── .gitignore
-├── .dockerignore
-├── Dockerfile
-├── docker-compose.yml      # Planned
-├── main.py
-├── pyproject.toml
-├── uv.lock
-└── README.md
-```
-
-The exact directory layout may change as implementation progresses.
-
 ## Getting Started
 
 ### Prerequisites
@@ -168,12 +136,14 @@ Copy the example configuration:
 
 ```powershell
 Copy-Item .env.example .env
+$env:ENV_MODE="development"
 ```
 
 **Linux/macOS**
 
 ```bash
 cp .env.example .env
+export ENV_MODE="development"
 ```
 
 Update `.env` as needed for your local environment. Never commit credentials, tokens, or private configuration values.
