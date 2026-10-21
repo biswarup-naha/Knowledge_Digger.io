@@ -255,7 +255,7 @@ The project is being built in incremental milestones.
 - [X] **Milestone 1 — Initial API foundation:** Python project setup, FastAPI health endpoint, and development tooling.
 - [X] **Milestone 2 — Configuration and logging foundation:** Validated settings, environment configuration, and structured logging.
 - [X] **Milestone 3 — Containerization:** Docker image, reliable container execution, and Docker Compose integration.
-- [ ] **Milestone 4 — Document ingestion:** File validation and support for PDF, DOCX, and TXT.
+- [X] **Milestone 4 — Document ingestion:** File validation and support for PDF, DOCX, and TXT.
 - [ ] **Milestone 5 — Text extraction and OCR:** Handle scanned PDFs and extract usable text.
 - [ ] **Milestone 6 — Chunking and embeddings:** Prepare document chunks and vector representations.
 - [ ] **Milestone 7 — Vector search with ChromaDB:** Store and retrieve relevant document passages.
