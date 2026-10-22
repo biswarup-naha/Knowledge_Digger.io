@@ -8,18 +8,13 @@ import re
 
 #region Document Extraction
 class DocumentExtractionService:
-    SUPPORTED_EXTENSIONS = {".pdf", ".docx", ".txt"}
 
     def extract_data(self, filename: str, content: bytes) -> str:
+        """Returns a bulk text data from raw supported files"""
         if not content:
             raise ValueError("The uploaded file is empty")
         
         extension = Path(filename).suffix.lower()
-        if extension not in self.SUPPORTED_EXTENSIONS:
-            raise ValueError(
-                f"Unsupported file type: {extension or 'unknown'}"
-            )
-        
         match extension:
             case ".pdf":
                 return self._extract_pdf(content)
@@ -31,6 +26,7 @@ class DocumentExtractionService:
                 raise ValueError("The uploaded file is empty")
 
     def _extract_pdf(self, content: bytes) -> str:
+        """Returns text data from PDF file"""
         reader = PdfReader(BytesIO(content))
         if reader.is_encrypted:
             raise ValueError("Encrypted PDFs are not supported")
@@ -41,6 +37,7 @@ class DocumentExtractionService:
         return self._validate_extracted_text(text)
 
     def _extract_docx(self, content: bytes) -> str:
+        """Returns text data from Word file"""
         document = Document(BytesIO(content))
         text = "\n".join(
             paragraph.text
@@ -49,6 +46,7 @@ class DocumentExtractionService:
         return self._validate_extracted_text(text)
 
     def _extract_txt(self, content: bytes) -> str:
+        """Returns text data from text file"""
         try:
             text = content.decode("utf-8-sig")
         except UnicodeDecodeError as exc:
@@ -58,6 +56,7 @@ class DocumentExtractionService:
         return self._validate_extracted_text(text)
 
     def _validate_extracted_text(self, text: str) -> str:
+        """Removes whitespaces from both ends of the text"""
         text = text.strip()
         if not text:
             raise ValueError(
@@ -86,6 +85,7 @@ class DocumentChunkingService:
         self.chunk_overlap = int(chunk_overlap_fraction * 10) if int(chunk_overlap_fraction * chunk_size) == 0 else int(chunk_overlap_fraction * chunk_size)
 
     def get_chunks_with_overlap(self, text: str) -> list[str]:
+        """Returns chunks of data from the raw bulk data"""
         if not text or not text.strip():
             return []
         words = re.findall(r"\S+", text)
