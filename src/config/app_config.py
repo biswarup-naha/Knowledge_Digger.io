@@ -45,6 +45,7 @@ class Settings(BaseSettings):
     # AI Models & Retrieval Settings
     HF_HOME: str = os.getenv("HF_HOME", "/models/huggingface")
     EMBEDDING_MODEL: str = os.getenv("EMBEDDING_MODEL", "")
+    EMBEDDING_DIMENSIONS: int = int(os.getenv("EMBEDDING_DIMENSIONS", ""))
     GENERATION_MODEL: str = os.getenv("GENERATION_MODEL", "")
     RERANKER_MODEL: str = os.getenv("RERANKER_MODEL", "")
     ENABLE_RERANKER: bool = (bool)(os.getenv("ENABLE_RERANKER", "False"))
