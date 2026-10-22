@@ -3,7 +3,7 @@ from io import BytesIO
 import pytest
 from docx import Document
 
-from src.services.document_extraction_service import (
+from src.services.document_service import (
     DocumentExtractionService,
 )
 

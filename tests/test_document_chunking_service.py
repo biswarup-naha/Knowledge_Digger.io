@@ -1,7 +1,7 @@
 
 import pytest
 
-from src.services.document_chunking_service import (
+from src.services.document_service import (
     DocumentChunkingService,
 )
 
