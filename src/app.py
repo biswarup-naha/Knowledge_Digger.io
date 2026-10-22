@@ -4,7 +4,7 @@ from src.config.app_config import get_settings
 from src.controllers.document_controller import create_document_router
 from src.controllers.health_controller import create_health_router
 from src.controllers.info_controller import create_info_router
-from src.services.document_service import DocumentExtractionService
+from src.services.document_extraction_service import DocumentExtractionService
 from src.services.health_service import HealthService
 from src.services.info_service import InfoService
 

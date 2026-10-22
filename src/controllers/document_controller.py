@@ -3,7 +3,7 @@ from pathlib import PurePosixPath, PureWindowsPath
 
 from fastapi import APIRouter, File, HTTPException, UploadFile, status
 
-from src.services.document_service import (
+from src.services.document_extraction_service import (
     DocumentExtractionService,
 )
 
