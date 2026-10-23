@@ -12,3 +12,6 @@ wheels/
 .venv
 .env
 .env.development
+
+# Database files
+data/
