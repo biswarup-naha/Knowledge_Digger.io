@@ -35,6 +35,8 @@ class Settings(BaseSettings):
     POSTGRES_USER: str = os.getenv("POSTGRES_USER", "")
     POSTGRES_PASSWORD: str = os.getenv("POSTGRES_PASSWORD", "")
     DATABASE_URL: str = os.getenv("DATABASE_URL", "")
+    CHROMA_DB: str = os.getenv("CHROMA_DB", "")
+    CHROMA_DB: str = os.getenv("CHROMA_COLLECTION", "")
 
     # Redis & Vector DB Settings
     REDIS_URL: str = os.getenv("REDIS_URL", "redis://redis:6379/0")
@@ -48,7 +50,7 @@ class Settings(BaseSettings):
     EMBEDDING_DIMENSIONS: int = int(os.getenv("EMBEDDING_DIMENSIONS", ""))
     GENERATION_MODEL: str = os.getenv("GENERATION_MODEL", "")
     RERANKER_MODEL: str = os.getenv("RERANKER_MODEL", "")
-    ENABLE_RERANKER: bool = (bool)(os.getenv("ENABLE_RERANKER", "False"))
+    ENABLE_RERANKER: bool = (bool)(os.getenv("ENABLE_RERANKER"))
     TOP_K: int = (int)(os.getenv("TOP_K", 0))
     MAX_CONTEXT_CHARS: int = (int)(os.getenv("MAX_CONTEXT_CHARS", "0"))
     MAX_ANSWER_TOKENS: int = (int)(os.getenv("MAX_ANSWER_TOKENS", "0"))
