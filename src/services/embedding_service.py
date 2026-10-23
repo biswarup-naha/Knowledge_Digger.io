@@ -41,7 +41,7 @@ class EmbeddingService:
 
     def embed_texts(self, texts: list[str]) -> list[list[float]]:
         """
-        Converts chunks of text into a matrix of embeddings
+        Converts chunks of text into a matrix of vector embeddings
         """
         if not texts:
             return []
@@ -63,5 +63,5 @@ class EmbeddingService:
         return embeddings.tolist()
 
     def embed_text(self, text: str) -> list[float]:
-        """Returns the first embedded text from all embeddings"""
+        """Returns the first embedded vector"""
         return self.embed_texts([text])[0]
