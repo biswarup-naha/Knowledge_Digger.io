@@ -3,10 +3,7 @@ from typing import Protocol
 
 import numpy as np
 
-
-class EmbeddingProvider(Protocol):
-    def embed_text(self, text: str) -> list[float]: ...
-    def embed_texts(self, texts: list[str]) -> list[list[float]]: ...
+from src.interfaces.embeddings import EmbeddingProvider
 
 class RetrievalService:
     def __init__(self, embedding_service: EmbeddingProvider) -> None:

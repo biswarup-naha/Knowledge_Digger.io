@@ -6,6 +6,7 @@ from src.services.retrieval_service import RetrievalService
 
 
 class FakeEmbeddingService:
+    """Provides deterministic embeddings without downloading a model."""
     vectors = {
         "account recovery question": [1.0, 0.0, 0.0],
         "recover account password": [0.9, 0.1, 0.0],
