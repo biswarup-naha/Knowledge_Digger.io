@@ -1,0 +1,69 @@
+name: KnowledgeDigger.io
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: knowledge-digger-api
+    environment:
+      ENVIRONMENT: development
+    env_file:
+      - .env.production
+      - .env.development
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/app/data
+    depends_on:
+      ollama-model-init:
+        condition: service_completed_successfully
+    restart: unless-stopped
+    networks:
+      - knowledge-digger
+
+  ollama:
+    image: ollama/ollama
+    container_name: knowledge-digger-ollama
+    volumes:
+      - ollama_data:/root/.ollama
+    expose:
+      - "11434"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    healthcheck:
+      test: ["CMD", "ollama", "list"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 15s
+    restart: unless-stopped
+    networks:
+      - knowledge-digger
+
+  ollama-model-init:
+    image: ollama/ollama
+    container_name: knowledge-digger-model-init
+    environment:
+      OLLAMA_HOST: http://ollama:11434
+      OLLAMA_MODEL: ${OLLAMA_MODEL:-qwen2.5:3b}
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - 'ollama pull "$${OLLAMA_MODEL}"'
+    depends_on:
+      ollama:
+        condition: service_healthy
+    restart: "no"
+    networks:
+      - knowledge-digger
+
+volumes:
+  ollama_data:
+
+networks:
+  knowledge-digger:
+    driver: bridge
