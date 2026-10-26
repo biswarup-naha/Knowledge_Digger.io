@@ -10,8 +10,8 @@ wheels/
 
 # Virtual environments
 .venv
-.env
-.env.development
+.env.*
+!.env.example
 
 # Database files
 data/

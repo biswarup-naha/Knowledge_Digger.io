@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from src.models.health_model import HealthResponse
+from src.schemas.health import HealthResponse
 from src.services.health_service import HealthService
 
 

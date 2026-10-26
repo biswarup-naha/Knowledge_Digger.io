@@ -49,6 +49,8 @@ class Settings(BaseSettings):
     EMBEDDING_MODEL: str = os.getenv("EMBEDDING_MODEL", "")
     EMBEDDING_DIMENSIONS: int = int(os.getenv("EMBEDDING_DIMENSIONS", ""))
     GENERATION_MODEL: str = os.getenv("GENERATION_MODEL", "")
+    GENERATION_BACKEND: str = os.getenv("GENERATION_BACKEND", "")
+    OLLAMA_BASE_URL: str = os.getenv("OLLAMA_BASE_URL", "")
     RERANKER_MODEL: str = os.getenv("RERANKER_MODEL", "")
     ENABLE_RERANKER: bool = (bool)(os.getenv("ENABLE_RERANKER"))
     TOP_K: int = (int)(os.getenv("TOP_K", 0))
