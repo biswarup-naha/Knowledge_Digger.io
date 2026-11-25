@@ -22,7 +22,7 @@ chunks = [
 stored_count = store.add_chunks(
     user_id="test-user-1",
     document_id="test-document-1",
-    chunks=chunks,
+    chunks=chunks
 )
 
 print("Chunks stored:", stored_count)

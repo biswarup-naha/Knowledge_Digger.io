@@ -30,6 +30,7 @@ class VectorStoreService:
         user_id: str,
         document_id: str,
         chunks: list[str],
+        filename: str = ""
     ) -> int:
         """Inserts or safely re-indexes a document's chunks in the database. 
         One important limitation: ChromaDB doesn't provide a transaction spanning these operations. So this approach reduces the risk of losing the old version if embedding generation fails, but it isn't fully atomic if a database operation fails midway."""
@@ -67,6 +68,7 @@ class VectorStoreService:
                 "user_id": user_id,
                 "document_id": document_id,
                 "chunk_index": index,
+                "filename": filename
             }
             for index in range(len(chunks))
         ]

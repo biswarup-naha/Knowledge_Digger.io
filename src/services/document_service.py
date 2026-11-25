@@ -1,10 +1,13 @@
 
 from pathlib import Path
 from io import BytesIO
+from uuid import uuid4
 from docx import Document
 from pypdf import PdfReader
 
 import re
+
+from src.services.vector_store_service import VectorStoreService
 
 #region Document Extraction
 class DocumentExtractionService:
@@ -103,4 +106,67 @@ class DocumentChunkingService:
             start = end - self.chunk_overlap
         return chunks
 
+#endregion
+
+#region Document Ingestion
+class DocumentIngestionService:
+    def __init__(
+        self,
+        extraction_service: DocumentExtractionService,
+        chunking_service: DocumentChunkingService,
+        vector_store_service: VectorStoreService,
+    ) -> None:
+        self.extraction_service = extraction_service
+        self.chunking_service = chunking_service
+        self.vector_store_service = vector_store_service
+
+    def ingest_document(
+        self,
+        user_id: str,
+        filename: str,
+        content: bytes,
+    ) -> dict:
+        if not isinstance(user_id, str) or not user_id.strip():
+            raise ValueError("User ID must be a non-empty string")
+
+        if not isinstance(filename, str) or not filename.strip():
+            raise ValueError("Filename must be a non-empty string")
+
+        if not content:
+            raise ValueError("The uploaded file is empty")
+
+        user_id = user_id.strip()
+        filename = filename.strip()
+
+        extracted_text = self.extraction_service.extract_data(
+            filename,
+            content,
+        )
+
+        chunks = self.chunking_service.get_chunks_with_overlap(
+            extracted_text
+        )
+
+        if not chunks:
+            raise ValueError("No chunks could be created from the document")
+
+        document_id = str(uuid4())
+
+        stored_chunks = self.vector_store_service.add_chunks(
+            user_id=user_id,
+            document_id=document_id,
+            chunks=chunks,
+            filename=filename,
+        )
+
+        if stored_chunks != len(chunks):
+            raise RuntimeError("Not all document chunks were stored")
+
+        return {
+            "document_id": document_id,
+            "filename": filename,
+            "character_count": len(extracted_text),
+            "chunk_count": stored_chunks,
+            "status": "indexed",
+        }
 #endregion
