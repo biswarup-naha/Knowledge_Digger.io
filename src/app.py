@@ -43,7 +43,15 @@ class App:
         generation_service = GenerationService()
         embedding_service = EmbeddingService()
         chunking_service = DocumentChunkingService()
-        vector_store_service = VectorStoreService(embedding_service)
+        vector_store_service = VectorStoreService(
+            embedding_service=embedding_service,
+            collection_name=self.settings.CHROMA_COLLECTION or "knowledge_documents",
+            mode=self.settings.CHROMA_MODE,
+            host=self.settings.CHROMA_HOST,
+            port=self.settings.CHROMA_PORT,
+            ssl=self.settings.CHROMA_SSL,
+            auth_token=self.settings.CHROMA_AUTH_TOKEN,
+        )
         ingestion_service = DocumentIngestionService(extraction_service, chunking_service, vector_store_service)
         query_service = QueryService(vector_store_service, generation_service)
 

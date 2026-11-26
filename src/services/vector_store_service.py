@@ -1,5 +1,6 @@
 
 from pathlib import Path
+from typing import Literal
 
 import chromadb
 import numpy as np
@@ -13,14 +14,32 @@ class VectorStoreService:
         embedding_service: EmbeddingProvider,
         persist_directory: str = "data/chroma",
         collection_name: str = "knowledge_documents",
+        mode: Literal["local", "http"] = "local",
+        host: str = "localhost",
+        port: int = 8000,
+        ssl: bool = False,
+        auth_token: str = "",
     ) -> None:
         self.embedding_service = embedding_service
 
-        Path(persist_directory).mkdir(parents=True, exist_ok=True)
+        if mode == "http":
+            headers = (
+                {"Authorization": f"Bearer {auth_token}"}
+                if auth_token
+                else None
+            )
+            self.client = chromadb.HttpClient(
+                host=host,
+                port=port,
+                ssl=ssl,
+                headers=headers,
+            )
+        else:
+            Path(persist_directory).mkdir(parents=True, exist_ok=True)
+            self.client = chromadb.PersistentClient(
+                path=persist_directory
+            )
 
-        self.client = chromadb.PersistentClient(
-            path=persist_directory
-        )
         self.collection = self.client.get_or_create_collection(
             name=collection_name,
             metadata={"hnsw:space": "cosine"},
