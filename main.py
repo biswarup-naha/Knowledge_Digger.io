@@ -1,5 +1,6 @@
-from src.app import get_app_instance
 import uvicorn
+
+from src.app import get_app_instance
 
 app = get_app_instance()
 

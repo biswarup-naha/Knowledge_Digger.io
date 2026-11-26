@@ -1,5 +1,5 @@
 from src.config.app_config import get_settings
-from src.models.health_model import HealthResponse
+from src.schemas.health import HealthResponse
 
 
 class HealthService:

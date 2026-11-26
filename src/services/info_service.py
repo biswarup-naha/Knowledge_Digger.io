@@ -1,5 +1,5 @@
 from src.config.app_config import get_settings
-from src.models.info_model import InfoResponse
+from src.schemas.info import InfoResponse
 
 
 class InfoService:
