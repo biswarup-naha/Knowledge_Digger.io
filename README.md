@@ -259,7 +259,7 @@ The project is being built in incremental milestones.
 - [X] **Milestone 5 — Text extraction and OCR:** Handle scanned PDFs and extract usable text.
 - [X] **Milestone 6 — Chunking and embeddings:** Prepare document chunks and vector representations.
 - [X] **Milestone 7 — Vector search with ChromaDB:** Store and retrieve relevant document passages.
-- [ ] **Milestone 8 — RAG question answering:** Integrate a language model with retrieved context.
+- [X] **Milestone 8 — RAG question answering:** Integrate a language model with retrieved context.
 - [ ] **Milestone 9 — Multi-user privacy and authorization:** Enforce access boundaries and test isolation.
 - [ ] **Milestone 10 — Evaluation and deployment:** Measure retrieval quality, improve reliability, and prepare deployment documentation.
 
