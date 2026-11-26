@@ -1,10 +1,10 @@
-from functools import lru_cache
 import os
+from functools import lru_cache
 from typing import Literal
+
+from dotenv import load_dotenv
 from pydantic import field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
-from dotenv import load_dotenv
-
 
 # Detect runtime environment to load either .env.development or .env.production
 ENVIRONMENT = os.getenv("ENVIRONMENT", "development")
@@ -36,12 +36,12 @@ class Settings(BaseSettings):
     POSTGRES_PASSWORD: str = os.getenv("POSTGRES_PASSWORD", "")
     DATABASE_URL: str = os.getenv("DATABASE_URL", "")
     CHROMA_DB: str = os.getenv("CHROMA_DB", "")
-    CHROMA_DB: str = os.getenv("CHROMA_COLLECTION", "")
+    CHROMA_COLLECTION: str = os.getenv("CHROMA_COLLECTION", "")
 
     # Redis & Vector DB Settings
     REDIS_URL: str = os.getenv("REDIS_URL", "redis://redis:6379/0")
     CHROMA_HOST: str = os.getenv("CHROMA_HOST", "chroma")
-    CHROMA_PORT: int = (int)(os.getenv("CHROMA_PORT", 8000))
+    CHROMA_PORT: int = (int)(os.getenv("CHROMA_PORT", "8000"))
     CHROMA_COLLECTION_PREFIX: str = os.getenv("CHROMA_COLLECTION_PREFIX", "")
 
     # AI Models & Retrieval Settings
@@ -53,7 +53,7 @@ class Settings(BaseSettings):
     OLLAMA_BASE_URL: str = os.getenv("OLLAMA_BASE_URL", "")
     RERANKER_MODEL: str = os.getenv("RERANKER_MODEL", "")
     ENABLE_RERANKER: bool = (bool)(os.getenv("ENABLE_RERANKER"))
-    TOP_K: int = (int)(os.getenv("TOP_K", 0))
+    TOP_K: int = (int)(os.getenv("TOP_K", "0"))
     MAX_CONTEXT_CHARS: int = (int)(os.getenv("MAX_CONTEXT_CHARS", "0"))
     MAX_ANSWER_TOKENS: int = (int)(os.getenv("MAX_ANSWER_TOKENS", "0"))
     OCR_LANGUAGE: str = os.getenv("OCR_LANGUAGE", "eng")

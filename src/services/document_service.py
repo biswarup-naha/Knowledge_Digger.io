@@ -1,16 +1,19 @@
 
-from pathlib import Path
+import re
 from io import BytesIO
+from pathlib import Path
 from uuid import uuid4
+
 from docx import Document
 from pypdf import PdfReader
 
-import re
-
 from src.services.vector_store_service import VectorStoreService
+
 
 #region Document Extraction
 class DocumentExtractionService:
+    def __init__(self):
+        self.SUPPORTED_EXTENSIONS = {".pdf", ".docx", ".txt"}
 
     def extract_data(self, filename: str, content: bytes) -> str:
         """Returns a bulk text data from raw supported files"""

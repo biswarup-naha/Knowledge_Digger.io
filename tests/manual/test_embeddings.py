@@ -2,7 +2,6 @@
 
 from src.services.embedding_service import EmbeddingService
 
-
 service = EmbeddingService()
 
 texts = [
