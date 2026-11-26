@@ -3,7 +3,9 @@ from pathlib import Path
 
 import chromadb
 import numpy as np
+
 from src.interfaces.embeddings import EmbeddingProvider
+
 
 class VectorStoreService:
     def __init__(
@@ -36,13 +38,13 @@ class VectorStoreService:
         One important limitation: ChromaDB doesn't provide a transaction spanning these operations. So this approach reduces the risk of losing the old version if embedding generation fails, but it isn't fully atomic if a database operation fails midway."""
 
         if not isinstance(user_id, str) or not user_id.strip():
-            raise ValueError("User ID must be a non-empty string")
+            raise TypeError("User ID must be a non-empty string")
         if not isinstance(document_id, str) or not document_id.strip():
-            raise ValueError("Document ID must be a non-empty string")
+            raise TypeError("Document ID must be a non-empty string")
         if not isinstance(chunks, list):
-            raise ValueError("Chunks must be a list of strings")
+            raise TypeError("Chunks must be a list of strings")
         if any(not isinstance(chunk, str) or not chunk.strip() for chunk in chunks):
-            raise ValueError("All chunks must be non-empty strings")
+            raise TypeError("All chunks must be non-empty strings")
 
         if not chunks:
             return 0

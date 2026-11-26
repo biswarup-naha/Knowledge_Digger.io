@@ -6,12 +6,13 @@ from src.services.vector_store_service import VectorStoreService
 
 class FakeEmbeddingService:
     """Provides deterministic embeddings without downloading a model."""
-    vectors = {
-        "account recovery question": [1.0, 0.0, 0.0],
-        "recover account password": [0.9, 0.1, 0.0],
-        "contact account support": [0.7, 0.7, 0.0],
-        "dashboard color settings": [0.0, 0.0, 1.0],
-    }
+    def __init__(self):
+        self.vectors = {
+            "account recovery question": [1.0, 0.0, 0.0],
+            "recover account password": [0.9, 0.1, 0.0],
+            "contact account support": [0.7, 0.7, 0.0],
+            "dashboard color settings": [0.0, 0.0, 1.0],
+        }
 
     def embed_text(self, text):
         return self.vectors[text]

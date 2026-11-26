@@ -1,9 +1,9 @@
 
-from typing import Protocol
 
 import numpy as np
 
 from src.interfaces.embeddings import EmbeddingProvider
+
 
 class RetrievalService:
     def __init__(self, embedding_service: EmbeddingProvider) -> None:

@@ -2,7 +2,6 @@
 from src.services.embedding_service import EmbeddingService
 from src.services.vector_store_service import VectorStoreService
 
-
 embedding_service = EmbeddingService()
 
 store = VectorStoreService(

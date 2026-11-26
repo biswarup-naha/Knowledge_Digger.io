@@ -3,7 +3,6 @@ from src.services.generation_service import GenerationService
 from src.services.vector_store_service import VectorStoreService
 
 
-
 class QueryService:
     def __init__(
         self,

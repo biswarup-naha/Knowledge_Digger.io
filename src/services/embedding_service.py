@@ -1,8 +1,10 @@
 
 
 from typing import Any
-from src.config.app_config import get_settings
+
 import numpy as np
+
+from src.config.app_config import get_settings
 
 
 class EmbeddingService:

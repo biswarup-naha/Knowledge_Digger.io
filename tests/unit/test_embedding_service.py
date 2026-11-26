@@ -5,7 +5,6 @@ import pytest
 from src.services.embedding_service import EmbeddingService
 
 
-
 class FakeEmbeddingModel:
     def encode(self, texts, **kwargs):
         return np.ones((len(texts), 384), dtype=np.float32)

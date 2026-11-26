@@ -1,4 +1,5 @@
 from fastapi import APIRouter
+
 from src.schemas.info import InfoResponse
 from src.services.info_service import InfoService
 

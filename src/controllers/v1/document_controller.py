@@ -1,14 +1,14 @@
 
+from collections.abc import Callable
 from pathlib import PurePosixPath, PureWindowsPath
-from typing import Annotated, Callable
+from typing import Annotated
 
-from fastapi import APIRouter, Depends, File, HTTPException, UploadFile, status
+from fastapi import APIRouter, Depends, HTTPException, UploadFile, status
 
 from src.services.document_service import (
     DocumentExtractionService,
-    DocumentIngestionService
+    DocumentIngestionService,
 )
-
 
 MAX_FILE_SIZE = 10 * 1024 * 1024
 SUPPORTED_EXTENSIONS = {".pdf", ".docx", ".txt"}
@@ -27,7 +27,7 @@ def create_document_router(
     @router.post("/upload")
     async def upload_document(
         user_id: Annotated[str, Depends(get_current_user_id)],
-        file: UploadFile = File(...),
+        file: UploadFile,
     ) -> dict:
         if not file.filename or not file.filename.strip():
             raise HTTPException(
@@ -94,7 +94,7 @@ def create_document_router(
             
     @router.post("/extract")
     async def extract_document(
-        file: UploadFile = File(...),
+        file: UploadFile,
         user_id: str = Depends(get_current_user_id)
     ) -> dict:
         if not file.filename or not file.filename.strip():
